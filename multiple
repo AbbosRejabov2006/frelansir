@@ -1,0 +1,121 @@
+/// src/components/Settings/PermissionsPage.tsx
+import React, { useState, useEffect } from 'react';
+import { StorageUtils } from '../../utils/storage';
+import { UserPermissions } from '../../types/UserPermissions';
+import { Sale } from '../../types/Sale';
+import { Payment } from '../../types/Payment';
+import { LOCAL_KEYS } from '../../utils/localStorage';
+import { isSupabaseConfigured, supabase, sbDeleteAll } from '../../utils/supabase';
+import { writeLocal } from '../../utils/localStorage';
+
+const PermissionsPage: React.FC = () => {
+  const [employees, setEmployees] = useState([]);
+  const [userPermissions, setUserPermissions] = useState([]);
+
+  const loadData = async () => {
+    try {
+      const allUsersMaybe = await StorageUtils.getUsers();
+      const allUsers = Array.isArray(allUsersMaybe) ? allUsersMaybe : [];
+      const nonAdminUsers = allUsers.filter((u) => u && u.role !== "admin");
+      setEmployees(nonAdminUsers);
+
+      const savedPermissionsRaw =
+        typeof window !== "undefined" ? localStorage.getItem("user_permissions") : null;
+
+      let parsed: unknown = null;
+      try {
+        parsed = savedPermissionsRaw ? JSON.parse(savedPermissionsRaw) : null;
+      } catch {
+        parsed = null;
+      }
+
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        setUserPermissions(parsed as UserPermissions[]);
+      } else {
+        const defaultPermissions: UserPermissions[] = nonAdminUsers.map((emp) => ({
+          userId: emp.id,
+          permissions: ["analytics_view_own", "analytics_view_dashboard"],
+        }));
+        setUserPermissions(defaultPermissions);
+      }
+    } catch (e) {
+      console.error("[PermissionsPage] loadData error:", e);
+      setEmployees([]);
+      setUserPermissions([]);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  return (
+    <div>
+      {/* Permissions page content here */}
+    </div>
+  );
+};
+
+export default PermissionsPage;
+
+// src/utils/storage.ts
+export class StorageUtils {
+  static async getUsers(): Promise<any[]> {
+    // Implementation here
+    return [];
+  }
+
+  static async resetStatistics(): Promise<void> {
+    // Zero local analytics sources
+    writeLocal<Sale>(LOCAL_KEYS.sales, []);
+    writeLocal<Payment>(LOCAL_KEYS.payments, []);
+
+    // Best-effort: clear in Supabase tables if configured
+    if (isSupabaseConfigured && supabase) {
+      await sbDeleteAll("sales");
+      await sbDeleteAll("payments");
+    }
+  }
+}
+
+// src/utils/localStorage.ts
+export const LOCAL_KEYS = {
+  sales: 'sales',
+  payments: 'payments',
+};
+
+export function writeLocal<T>(key: string, value: T): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+}
+
+// src/utils/supabase.ts
+export let isSupabaseConfigured = false;
+export let supabase: any = null;
+
+export async function sbDeleteAll(tableName: string): Promise<void> {
+  if (supabase) {
+    await supabase.from(tableName).delete();
+  }
+}
+
+// src/types/UserPermissions.ts
+export interface UserPermissions {
+  userId: string;
+  permissions: string[];
+}
+
+// src/types/Sale.ts
+export interface Sale {
+  id: string;
+  amount: number;
+  date: string;
+}
+
+// src/types/Payment.ts
+export interface Payment {
+  id: string;
+  amount: number;
+  date: string;
+}
