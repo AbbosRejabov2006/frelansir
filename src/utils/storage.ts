@@ -35,14 +35,14 @@ export class StorageUtils {
 
   // Products
   static async getProducts(): Promise<Product[]> {
-    const response = await fetch("http://192.168.1.5:8000/products")
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/products")
     const data = await response.json()
     return data
   }
 
   static async saveProducts(products: Product[]): Promise<void> {
     const arr = Array.isArray(products) ? products : []
-    const response = await fetch("http://192.168.1.5:8000/products", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/products", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -55,14 +55,14 @@ export class StorageUtils {
 
   // Categories
   static async getCategories(): Promise<Category[]> {
-    const response = await fetch("http://192.168.1.5:8000/categories")
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/categories")
     const data = await response.json()
     return data
   }
 
   static async saveCategories(categories: Category[]): Promise<void> {
     const arr = Array.isArray(categories) ? categories : []
-    const response = await fetch("http://192.168.1.5:8000/categories", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/categories", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -82,7 +82,7 @@ export class StorageUtils {
 
   // Sales
   static async getSales(): Promise<Sale[]> {
-    const response = await fetch("http://192.168.1.5:8000/sales")
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/sales")
     const data = await response.json()
     return data
   }
@@ -90,7 +90,7 @@ export class StorageUtils {
   static async saveSales(sales: Sale[]): Promise<any> {
     try {
       const arr = Array.isArray(sales) ? sales : []
-      const response = await fetch("http://192.168.1.5:8000/sales", {
+      const response = await fetch("https://beckend-production-3ce1.up.railway.app/sales", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -120,10 +120,10 @@ export class StorageUtils {
 
 
   static async addSale(sale: Sale): Promise<void> {
-    const res = await fetch("http://192.168.1.5:8000/sales")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/sales")
     const dataAll = await res.json()
     const next = [...dataAll, sale]
-    const response = await fetch("http://192.168.1.5:8000/sales", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/sales", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -135,21 +135,21 @@ export class StorageUtils {
   }
 
   static async getNextReceiptNumber(): Promise<string> {
-    const res = await fetch("http://192.168.1.5:8000/sales")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/sales")
     const data = await res.json()
     return String(data.length + 1)
   }
 
   // Debtors
   static async getDebtors(): Promise<Debtor[]> {
-    const response = await fetch("http://192.168.1.5:8000/debtors")
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/debtors")
     const data = await response.json()
     return data
   }
 
   static async saveDebtors(debtors: Debtor[]): Promise<void> {
     const arr = Array.isArray(debtors) ? debtors : []
-    const response = await fetch("http://192.168.1.5:8000/debtors", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/debtors", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -161,10 +161,10 @@ export class StorageUtils {
   }
 
   static async addDebtor(debtor: Debtor): Promise<void> {
-    const res = await fetch("http://192.168.1.5:8000/debtors")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/debtors")
     const dataAll = await res.json()
     const next = [...dataAll, debtor]
-    const response = await fetch("http://192.168.1.5:8000/debtors", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/debtors", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -176,10 +176,10 @@ export class StorageUtils {
   }
 
   static async updateDebtor(debtorId: string, updatedDebtor: Debtor): Promise<void> {
-    const res = await fetch(`http://192.168.1.5:8000/debtors`)
+    const res = await fetch(`https://beckend-production-3ce1.up.railway.app/debtors`)
     const dataAll = await res.json()
     const next = dataAll.map((d: Debtor) => (String(d.id) === String(debtorId) ? updatedDebtor : d))
-    const response1 = await fetch(`http://192.168.1.5:8000/debtors`, {
+    const response1 = await fetch(`https://beckend-production-3ce1.up.railway.app/debtors`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -191,10 +191,10 @@ export class StorageUtils {
   }
 
   static async addPayment(payment: any): Promise<void> {
-    const res = await fetch("http://192.168.43.240:8000/payments")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/payments")
     const dataAll = await res.json()
     const next = upsertById(dataAll, payment)
-    const response = await fetch("http://192.168.1.5:8000/payments", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/payments", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -207,14 +207,14 @@ export class StorageUtils {
 
   // Users
   static async getUsers(): Promise<User[]> {
-    const response = await fetch("http://192.168.1.5:8000/users")
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/users")
     const data = await response.json()
     return data
   }
 
   static async saveUsers(users: User[]): Promise<void> {
     const arr = Array.isArray(users) ? users : []
-    const response = await fetch("http://192.168.1.5:8000/users", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/users", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -226,10 +226,10 @@ export class StorageUtils {
   }
 
   static async addUser(user: User): Promise<void> {
-    const res = await fetch("http://192.168.1.5:8000/users")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/users")
     const dataAll = await res.json()
     const next = upsertById(dataAll, user)
-    const response = await fetch("http://192.168.1.5:8000/users", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/users", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -241,10 +241,10 @@ export class StorageUtils {
   }
 
   static async updateUser(updatedUser: User): Promise<void> {
-    const res = await fetch("http://192.168.1.5:8000/users")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/users")
     const dataAll = await res.json()
     const next = upsertById(dataAll, updatedUser)
-    const response = await fetch("http://192.168.1.5:8000/users", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/users", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -256,10 +256,10 @@ export class StorageUtils {
   }
 
   static async deleteUser(userId: string): Promise<void> {
-    const res = await fetch("http://192.168.1.5:8000/users")
+    const res = await fetch("https://beckend-production-3ce1.up.railway.app/users")
     const dataAll = await res.json()
     const next = dataAll.filter((u: User) => String(u.id) !== String(userId))
-    const response = await fetch("http://192.168.1.5:8000/users", {
+    const response = await fetch("https://beckend-production-3ce1.up.railway.app/users", {
       headers: {
         "Content-Type": "application/json",
       },

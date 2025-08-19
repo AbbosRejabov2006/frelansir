@@ -26,7 +26,7 @@ function normalizeProduct(p: any): Product | null {
   }
 }
 
-const socket = io("http://192.168.1.5:8000", {
+const socket = io("https://beckend-production-3ce1.up.railway.app", {
   transports: ["websocket"], // fallbacklarni o'chirish uchun
 });
 const ProductsPage: React.FC = () => {

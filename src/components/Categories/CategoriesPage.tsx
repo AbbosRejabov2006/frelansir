@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Plus, Edit2, Trash2, Wallpaper } from "lucide-react"
 import type { Category } from "../../types"
-import { StorageUtils } from "../../utils/storage"
+// import { StorageUtils } from "../../utils/storage"
 import * as LucideIcons from "lucide-react"
 import { useAuth } from "../../context/AuthContext" // Import useAuth
 import { useToast } from "../../hooks/use-toast" // Import useToast
@@ -12,7 +12,7 @@ import CategoryModal from "./CategoryModal" // Ensure this is imported
 import { io } from "socket.io-client"
 
 
-const socket = io("http://192.168.1.5:8000", {
+const socket = io("https://beckend-production-3ce1.up.railway.app", {
   transports: ["websocket"], // fallbacklarni o'chirish uchun
 });
 
