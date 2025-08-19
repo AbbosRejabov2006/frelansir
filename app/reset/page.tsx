@@ -4,8 +4,8 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { CheckCircle2, RotateCcw } from "lucide-react"
 import { Button } from "../../components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card"
-import { StorageUtils } from "../../src/utils/storage"
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
+// import { StorageUtils } from "../../src/utils/storage"
 import React from "react"
 
 export default function ResetStatsPage() {
