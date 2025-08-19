@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { AlertTriangle, Package, TrendingDown, RefreshCw } from "lucide-react"
-import { StorageUtils } from "../../utils/storage"
+
 import type { Product, Category, StockAlert } from "../../types"
 import * as LucideIcons from "lucide-react"
 import { io } from "socket.io-client"
@@ -19,7 +19,7 @@ const DEFAULT_ALERTS: StockAlert[] = [
 function toArray<T>(v: unknown): T[] {
   return Array.isArray(v) ? (v as T[]) : []
 }
-const socket = io("http://192.168.43.240:8000", {
+const socket = io("http://192.168.1.5:8000", {
   transports: ["websocket"], // fallbacklarni o'chirish uchun
 });
 

@@ -3,28 +3,29 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { CheckCircle2, RotateCcw } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "../../components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card"
 import { StorageUtils } from "../../src/utils/storage"
+import React from "react"
 
 export default function ResetStatsPage() {
   const [done, setDone] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    let mounted = true
-    ;(async () => {
-      try {
-        await StorageUtils.resetStatistics()
-        if (mounted) setDone(true)
-      } catch (e: any) {
-        if (mounted) setError(String(e?.message ?? e))
-      }
-    })()
-    return () => {
-      mounted = false
-    }
-  }, [])
+  // useEffect(() => {
+  //   let mounted = true
+  //   ;(async () => {
+  //     try {
+  //       await StorageUtils.resetStatistics()
+  //       if (mounted) setDone(true)
+  //     } catch (e: any) {
+  //       if (mounted) setError(String(e?.message ?? e))
+  //     }
+  //   })()
+  //   return () => {
+  //     mounted = false
+  //   }
+  // }, [])
 
   return (
     <main className="min-h-[60vh] w-full flex items-center justify-center p-6">
